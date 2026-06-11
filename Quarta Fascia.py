@@ -18,7 +18,7 @@ colori = [color_map.get(squadra, "#ffffff") for squadra in df.index]
 
 st.write("""
          # Classifica Oratorio Feriale 2026
-         *Classifica Generale*""")
+         *Classifica della quarta Fascia*""")
 fig = go.Figure(go.Bar(
     x=df.iloc[:, 0],
     y=df.index,
@@ -28,5 +28,16 @@ fig = go.Figure(go.Bar(
     textposition='outside',
     textfont=dict(size=16)
 ))
-st.plotly_chart(fig, use_container_width=True)
+fig.update_xaxes(fixedrange=True)
+fig.update_yaxes(fixedrange=True)
+st.plotly_chart(fig, use_container_width=True, config={
+    "modeBarButtonsToRemove": [
+        "zoom2d",
+        "select2d",
+        "lasso2d",
+    ],
+    "scrollZoom": False,        # disabilita zoom con scroll del mouse
+    "doubleClick": False,
+}
+)
 
